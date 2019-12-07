@@ -1,0 +1,40 @@
+﻿@model PostList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+ <div class="row">
+     <div class="col-md-8">
+         @foreach (var item in Model.Posts)
+         {
+             <div class="post-preview">
+                 <a asp-controller="Makale" asp-action="Detay" asp-route-url="@item.Url">
+                     <h2 class="post-title">
+                         @item.Title
+                     </h2>
+                     <h3 class="post-subtitle">
+                         @item.Description
+                     </h3>
+                 </a>
+                 <p class="post-meta">
+                     Posted by
+                     <a href="#">@item.AuthorName</a>
+                     on @item.CreatedDate.ToString("dd MMMM yyyy")
+                 </p>
+             </div>
+             <hr>
+
+         }
+
+             <div page-model="@Model.PagingInfo" page-action="Index">
+                
+             </div>
+
+     </div>
+    
+    @await Component.InvokeAsync("CategoriesComponent")
+     
+ </div>
+ 
+
+

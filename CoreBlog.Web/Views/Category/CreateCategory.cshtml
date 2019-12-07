@@ -1,0 +1,33 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Yeni Kategori</h3>
+    </div>
+    <form asp-controller="Category" asp-action="CreateCategory" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+                <label asp-for="Title" class="col-sm-2 control-label">Başlık</label>
+                <div class="col-sm-10">
+                    <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Başlık">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="IsActive" class="col-sm-2 control-label">Aktiflik Durumu</label>
+                <div class="col-sm-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="IsActive">
+                        <label class="custom-control-label" for="customSwitch1"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary float-right">Kaydet</button>
+        </div>
+    </form>
+</div>

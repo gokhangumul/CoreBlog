@@ -1,0 +1,88 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "UpdateSettings";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+
+<div class="card ">
+    <div class="card-header">
+        <h3 class="card-title">Update Settings</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form class="form-horizontal" asp-controller="Settings" asp-action="UpdateSettings" enctype="multipart/form-data" method="post">
+        <input type="hidden" asp-for="MainHeaderImage" />
+        <input  type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="SettingName"/>
+        <div class="card-body">
+            <div class="form-group row">
+                <label asp-for="BlogName" class="col-sm-2 control-label">Sayfa Adı</label>
+                <div class="col-sm-10">
+                    <input asp-for="BlogName" type="text" class="form-control" id="title" placeholder="Sayfa Adı">
+                    <span asp-validation-for="BlogName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Instagram" class="col-sm-2 control-label">İnstagram</label>
+                <div class="col-sm-10">
+                    <input asp-for="Instagram" type="text" class="form-control" id="inputPassword3" placeholder="İnstagram">
+                    <span asp-validation-for="Instagram" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Twitter" class="col-sm-2 control-label">Twitter</label>
+                <div class="col-sm-10">
+                    <input asp-for="Twitter" type="text" class="form-control" id="inputPassword3" placeholder="Twitter">
+                    <span asp-validation-for="Twitter" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Facebook" class="col-sm-2 control-label">Facebook</label>
+                <div class="col-sm-10">
+                    <input asp-for="Facebook" type="text" class="form-control" id="inputPassword3" placeholder="Facebook">
+                    <span asp-validation-for="Twitter" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="MainHeaderImage" class="col-sm-2 control-label">Anasayfa Header Resmi</label>
+                <div class="col-sm-10">
+                    <img src="~/Content/Back/pageimg/@Model.MainHeaderImage" width="80" class="img-thumbnail" />
+                    <input type="file" class="form-control-file" id="images" name="images"
+                           title="Fotoğraf Seç" asp-for="MainHeaderImage">
+                    <span class="text-danger">@TempData["imgerror"]</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="MainHeader" class="col-sm-2 control-label">Ana Sayfa Üst Başlık</label>
+                <div class="col-sm-10">
+                    <input asp-for="MainHeader" type="text" class="form-control" id="inputPassword3" placeholder="Üst Başlık">
+                    <span asp-validation-for="MainHeader" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="MainSubHeader" class="col-sm-2 control-label">Ana Sayfa Alt Başlık</label>
+                <div class="col-sm-10">
+                    <input asp-for="MainSubHeader" type="text" class="form-control" id="inputPassword3" placeholder="Alt Başlık">
+                    <span asp-validation-for="MainSubHeader" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="About" class="col-sm-2 control-label">Hakkımda</label>
+                <div class="col-sm-10">
+                    <textarea asp-for="About" class="textarea" placeholder="Place some text here"
+                              style="width: 100%; height: 200px; font-size: 14px;
+                    line-height: 18px; border: 1px solid #dddddd; padding: 10px;">@Html.Raw(Model.About)</textarea>
+                    <span asp-validation-for="About" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary float-right">Kaydet</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>
+

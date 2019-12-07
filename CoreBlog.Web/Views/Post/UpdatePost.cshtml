@@ -1,0 +1,76 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "UpdatePost";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+}
+
+<div class="card ">
+    <div class="card-header">
+        <h3 class="card-title">Update Post</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form class="form-horizontal" asp-controller="Post" asp-action="UpdatePost" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="Id" value="@Model.Id"/>
+        <input type="hidden" name="AuthorName" value="@Model.AuthorName" />
+        <input type="hidden" name="Url" value="@Model.Url"/>
+        <input type="hidden" name="CreatedDate" value="@Model.CreatedDate"/>
+        <input type="hidden" name="PostDetailHeaderImage" value="@Model.PostDetailHeaderImage" />
+        <div class="card-body">
+            <div class="form-group row">
+                <label asp-for="Title" class="col-sm-2 control-label">Başlık</label>
+                <div class="col-sm-10">
+                    <input asp-for="Title" type="text" class="form-control" id="title" placeholder="Başlık">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Description" class="col-sm-2 control-label">Açıklama</label>
+                <div class="col-sm-10">
+                    <input asp-for="Description" type="text" class="form-control" id="inputPassword3" placeholder="Açıklama">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Category" class="col-sm-2 control-label">Post Kategori</label>
+                <div class="col-sm-10">
+                    <select asp-for="CategoryId" class="form-control select2" style="width: 100%;" asp-items="ViewBag.categoryItem"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="PostDetailHeaderImage" class="col-sm-2 control-label">Post Detay Header Resmi</label>
+                <div class="col-sm-10">
+                    <img  src="~/Content/Back/postuploads/@Model.PostDetailHeaderImage" width="80" class="img-thumbnail"/>
+                    <input type="file" class="form-control-file" id="images" name="images"
+                           title="Fotoğraf Seç" asp-for="PostDetailHeaderImage">
+                    <span class="text-danger">@TempData["imgerror"]</span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="PostContent" class="col-sm-2 control-label">İçerik</label>
+                <div class="col-sm-10">
+                    <textarea asp-for="PostContent" class="textarea" placeholder="Place some text here"
+                              style="width: 100%; height: 200px; font-size: 14px;
+                    line-height: 18px; border: 1px solid #dddddd; padding: 10px;">@Html.Raw(Model.PostContent)</textarea>
+                    <span asp-validation-for="PostContent" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="IsActive" class="col-sm-2 control-label">Aktiflik Durumu</label>
+                <div class="col-sm-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="IsActive">
+                        <label class="custom-control-label" for="customSwitch1"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary float-right">Kaydet</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>

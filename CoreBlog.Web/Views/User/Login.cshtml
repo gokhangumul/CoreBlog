@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link href="~/Content/Back/Css/all.min.css" rel="stylesheet" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link href="~/Content/Back/Css/adminlte.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        #error ul li{
+            list-style:none;
+        }
+    </style>
+</head>
+ <body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Login</b>Page</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                    <div class="text-danger ml-3" asp-validation-summary="All" id="error"></div>
+                
+
+                <p class="login-box-msg">Giriş Yapınız</p>
+                <form asp-controller="User" asp-action="Login" method="post">
+                    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <!-- /.social-auth-links -->
+                <p class="mb-1 mt-5">
+                    <a href="#">Şifremi unuttum</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+
+    <script src="~/Content/Back/Js/jquery.min.js"></script>
+    <script src="~/Content/Back/Js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

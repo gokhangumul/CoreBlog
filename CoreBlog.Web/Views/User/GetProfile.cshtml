@@ -1,0 +1,134 @@
+﻿@model PassAndBaseView
+@{
+    ViewData["Title"] = "GetProfile";
+    Layout = "~/Views/Shared/_LayoutBack.cshtml";
+    string nameSurname = Model.AppUser.Name + " " + Model.AppUser.SurName;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    @if (Model.AppUser.ProfileImage != null)
+                    {
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="~/Content/Back/userimg/@Model.AppUser.ProfileImage"
+                                 alt="User profile picture">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="~/Content/Back/pageimg/avatar5.png"
+                                 alt="User profile picture">
+                        </div>
+                    }
+                    <h3 class="profile-username text-center">@nameSurname</h3>
+                    <p class="text-muted text-center">@Model.AppUser.JobDesc</p>
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>UserName :</b> <a class="ml-2">@Model.AppUser.UserName</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>E-Mail :</b> <a class="ml-2">@Model.AppUser.Email</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Kullanıcı Bilgilerini Güncelle</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pass" data-toggle="tab">Parola Güncelle</a></li>
+                    </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="settings">
+                            <form class="form-horizontal" asp-controller="User" asp-action="UpdateBase" enctype="multipart/form-data" method="post">
+                                <input type="hidden" asp-for="AppUser.UserName" />
+                                <input type="hidden" asp-for="AppUser.ProfileImage" />
+                                <div class="form-group">
+                                    <label asp-for="AppUser.Name" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="AppUser.Name" type="text" class="form-control" id="Name" placeholder="Name">
+                                        <span asp-validation-for="AppUser.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="AppUser.SurName" class="col-sm-2 control-label">SurName</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="AppUser.SurName" type="text" class="form-control" id="SurName" placeholder="SurName">
+                                        <span asp-validation-for="AppUser.SurName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="AppUser.Email" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="AppUser.Email" type="email" class="form-control" id="Email" placeholder="Email">
+                                        <span class="text-danger">@TempData["emailError"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="AppUser.JobDesc" class="col-sm-2 control-label">Meslek</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="AppUser.JobDesc" type="text" class="form-control" id="Email" placeholder="Meslek">
+                                        <span asp-validation-for="AppUser.JobDesc" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="AppUser.ProfileImage">Profil Resmi</label>
+                                    <div class="col-sm-10">
+
+                                        <input type="file" class="form-control-file" id="images" name="images" asp-for="AppUser.ProfileImage">
+                                        <span class="text-danger">@TempData["imgerror"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="pass">
+                            <form class="form-horizontal" asp-controller="User" asp-action="UpdatePassword" method="post">
+                                <div class="form-group">
+                                    <label asp-for="PassUpdateViewModel.NewPass" class="col-sm-2 control-label">Yeni Parola</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="PassUpdateViewModel.NewPass" type="password" class="form-control" id="NewPass" placeholder="Yeni Parola">
+                                        <span asp-validation-for="PassUpdateViewModel.NewPass" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PassUpdateViewModel.AgainNewPass" class="col-sm-2 control-label">Yeni Parola Tekrar</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="PassUpdateViewModel.AgainNewPass" type="password" class="form-control" id="AgainNewPass" placeholder="Yeni Parola Tekrar">
+                                        <span asp-validation-for="PassUpdateViewModel.AgainNewPass" class="text-danger"></span>
+                                        <span class="text-danger">@TempData["passMatch"]</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+    </div>
+</div>
+
